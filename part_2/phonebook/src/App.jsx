@@ -3,6 +3,7 @@ import axios from 'axios'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 import personService from './services/persons'
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [notifcation, setNotification] = useState(null)
 
   const handleNameChange = e => setNewName(e.target.value);
   const handleNumberChange = e => setNewNumber(e.target.value);
@@ -47,6 +49,7 @@ const App = () => {
         setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
+        setNotification(`Added ${returnedPerson.name}`)
       })
   }
 
@@ -60,9 +63,10 @@ the old number with a new one?`)) {
             setPersons(persons.map(p => p.id === person.id ? returnedPerson : p))
             setNewName('')
             setNewNumber('')
+            setNotification(`Updated the number for ${returnedPerson.name}`)
           })
           .catch(error => {
-            alert(`the person '${person.name}' was already deleted from server`)
+            alert(`${person.name} was already deleted from server`)
           })
       }
   }
@@ -98,6 +102,7 @@ the old number with a new one?`)) {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notifcation}/>
       <Filter onChange={handleFilterChange} value={newFilter}/>
       <h2>Add a new</h2>
       <PersonForm 
