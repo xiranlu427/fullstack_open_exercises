@@ -1,0 +1,1 @@
+Exercises of Part 3 are in its own repo as the backend of the phonebook app is rendered on Render. Here is the part 3 repo: https://github.com/xiranlu427/FSO_phonebook_backend
